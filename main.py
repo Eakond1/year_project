@@ -1,15 +1,17 @@
+import time
+import openpyxl
 import telebot
 from telebot import types
 import json
 
-bot = telebot.TeleBot('')
+bot = telebot.TeleBot('6897460981:AAFyclV4ixpEON5WuNNSyB1TSTNiv3IQ_R0')
 lessons = []
 users = []
 
 try:
     with open('lessons.json', 'r', encoding='utf-8') as file:
         lessons = json.loads(file.read())
-        print(lessons)
+
     with open('users.json', 'r', encoding='utf-8') as file:
         users = json.loads(file.read())
 except Exception as e:
@@ -50,21 +52,65 @@ def know_user_class(message):
 
 
 @bot.message_handler(commands=['schedule'])
-def schedule(message):
+def start(message):
     chat_id = message.chat.id
-    uroks = return_lessons(return_user_class(chat_id))
-    for urok in uroks:
-        bot.send_message(chat_id, f'{urok["name"]}, каб. {urok["room"]}\n{urok["teacher"]}')
+    bot.send_message(chat_id, 'Вот расписание для вас:')
 
-def return_user_class(chat_id):
-    for user in users:
-        if user['id'] == chat_id:
-            return user['class']
+    lesson = get_list_of_lessons("Monday")
+    bot.send_message(chat_id, 'Расписание на понедельник:')
+    send_lessons(lesson, chat_id)
 
-def return_lessons(class_name):
-    for lesson in lessons:
-        if lesson['class'] == class_name:
-            return lesson['lessons']
+    lesson = get_list_of_lessons("Tuesday")
+    bot.send_message(chat_id, 'Расписание на вторник')
+    send_lessons(lesson, chat_id)
+
+    lesson = get_list_of_lessons("Wednesday")
+    bot.send_message(chat_id, 'Расписание на среду')
+    send_lessons(lesson, chat_id)
+
+    lesson = get_list_of_lessons("Thursday")
+    bot.send_message(chat_id, 'Расписание на четверг')
+    send_lessons(lesson, chat_id)
+
+    lesson = get_list_of_lessons("Friday")
+    bot.send_message(chat_id, 'Расписание на пятницу')
+    send_lessons(lesson, chat_id)
+
+
+def send_lessons(lesson, chat_id):
+    for i in range(len(lesson)):
+        bot.send_message(chat_id, lesson[i])
+        time.sleep(1)
+
+def get_list_of_lessons(day):
+    dataframe = openpyxl.load_workbook("Расписание 10Т.xlsx")
+    active = dataframe.active
+    lesson = []
+    from_val = 0
+    to_val = 0
+    if day == 'Monday':
+        from_val = 3
+        to_val = 11
+    elif day == 'Tuesday':
+        from_val = 13
+        to_val = 20
+    elif day == 'Wednesday':
+        from_val = 22
+        to_val = 29
+    elif day == 'Thursday':
+        from_val = 31
+        to_val = 38
+    elif day == 'Friday':
+        from_val = 40
+        to_val = 47
+    for i in range(from_val, to_val):
+        num = active[f'A{i}'].value
+        name = active[f'B{i}'].value
+        cabinet = active[f'C{i}'].value
+        teacher = active[f'D{i}'].value
+        lesson.append(f'{num}. {name}, каб. {cabinet}, учитель: {teacher}')
+    return lesson
+
 
 
 
