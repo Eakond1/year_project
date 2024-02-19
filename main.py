@@ -7,7 +7,7 @@ import threading
 import calendar
 from config import tlist
 from datetime import datetime
-bot = telebot.TeleBot('6766612173:AAFoQ35rYwkgcsgrU2HluMfyjze4hRwXqzM')
+bot = telebot.TeleBot('')
 lessons = []
 users = []
 
