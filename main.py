@@ -3,8 +3,11 @@ import openpyxl
 import telebot
 from telebot import types
 import json
-
-bot = telebot.TeleBot('6897460981:AAFyclV4ixpEON5WuNNSyB1TSTNiv3IQ_R0')
+import threading
+import calendar
+from config import tlist
+from datetime import datetime
+bot = telebot.TeleBot('6766612173:AAFoQ35rYwkgcsgrU2HluMfyjze4hRwXqzM')
 lessons = []
 users = []
 
@@ -29,7 +32,7 @@ def save_data():
 def start(message):
     chat_id = message.chat.id
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    class_10t = types.KeyboardButton("10t")
+    class_10t = types.KeyboardButton("10Т")
     class_10i = types.KeyboardButton("10И")
     markup.add(class_10t, class_10i)
     m = bot.send_message(chat_id, 'Привет! В каком ты классе?', reply_markup=markup)
@@ -39,7 +42,7 @@ def start(message):
 def know_user_class(message):
     chat_id = message.chat.id
     user_class = message.text
-    if user_class == "10t" or user_class == "10И":
+    if user_class == "10Т" or user_class == "10И":
         users.append({
             "id": chat_id,
             "class": user_class
@@ -54,25 +57,23 @@ def know_user_class(message):
 @bot.message_handler(commands=['schedule'])
 def start(message):
     chat_id = message.chat.id
-    bot.send_message(chat_id, 'Вот расписание для вас:')
-
-    lesson = get_list_of_lessons("Monday", "10t")
+    lesson = get_list_of_lessons("Monday", tlist[0]['class'] )
     bot.send_message(chat_id, 'Расписание на понедельник:')
     send_lessons(lesson, chat_id)
 
-    lesson = get_list_of_lessons("Tuesday", "10t")
+    lesson = get_list_of_lessons("Tuesday",  tlist[0]['class'])
     bot.send_message(chat_id, 'Расписание на вторник')
     send_lessons(lesson, chat_id)
 
-    lesson = get_list_of_lessons("Wednesday", "10t")
+    lesson = get_list_of_lessons("Wednesday",  tlist[0]['class'])
     bot.send_message(chat_id, 'Расписание на среду')
     send_lessons(lesson, chat_id)
 
-    lesson = get_list_of_lessons("Thursday", "10t")
+    lesson = get_list_of_lessons("Thursday",  tlist[0]['class'])
     bot.send_message(chat_id, 'Расписание на четверг')
     send_lessons(lesson, chat_id)
 
-    lesson = get_list_of_lessons("Friday", "10t")
+    lesson = get_list_of_lessons("Friday",  tlist[0]['class'])
     bot.send_message(chat_id, 'Расписание на пятницу')
     send_lessons(lesson, chat_id)
 
@@ -82,7 +83,7 @@ def send_lessons(lesson, chat_id):
         time.sleep(1)
 
 def get_list_of_lessons(day, user_class):
-    if user_class == "10t":
+    if user_class == "10Т":
         dataframe = openpyxl.load_workbook("Расписание 10Т.xlsx")
         active = dataframe.active
         lesson = []
@@ -138,6 +139,9 @@ def get_list_of_lessons(day, user_class):
             teacher = active[f'D{i}'].value
             lesson.append(f'{num}. {name}, каб. {cabinet}, учитель: {teacher}')
         return lesson
+
+
+
 
 
 
