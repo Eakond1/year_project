@@ -6,7 +6,7 @@ import json
 import datetime
 import schedule
 
-bot = telebot.TeleBot('6897460981:AAFyclV4ixpEON5WuNNSyB1TSTNiv3IQ_R0')
+bot = telebot.TeleBot('')
 users = []
 
 try:
