@@ -5,7 +5,8 @@ from telebot import types
 import json
 import datetime
 import schedule
-bot = telebot.TeleBot('')
+
+bot = telebot.TeleBot('6897460981:AAFyclV4ixpEON5WuNNSyB1TSTNiv3IQ_R0')
 users = []
 
 try:
@@ -23,7 +24,6 @@ def save_data():
 @bot.message_handler(commands=['start', 'help'])
 def start(message):
     chat_id = message.chat.id
-
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     class_10t = types.KeyboardButton("10Т")
     class_10i = types.KeyboardButton("10И")
@@ -55,7 +55,8 @@ def know_user_class(message):
 @bot.message_handler(commands=['schedule'])
 def start(message):
     chat_id = message.chat.id
-    schedule.every().day.at("15:13").do(send_notification, chat_id)
+    schedule.every().day.at("13:21").do(send_notification, chat_id)
+    schedule.every().thursday.at("14:07").do(send_monday_second, chat_id)
 
 
 def send_lessons(lesson, chat_id):
@@ -173,6 +174,45 @@ def send_notification(chat_id):
         send_lessons(lesson, chat_id)
 
 
+def get_Monday_two(clas):
+    wd = datetime.datetime.today().weekday()
+    if clas == "10Т":
+        dataframe = openpyxl.load_workbook("Расписание 10Т.xlsx")
+        active = dataframe.active
+        lesson = []
+        if wd == 3:
+            num = active[f'A{3}'].value
+            name = active[f'B{3}'].value
+            cabinet = active[f'C{3}'].value
+            teacher = active[f'D{3}'].value
+            lesson.append(f'{num}. {name}, каб. {cabinet}, учитель: {teacher}')
+            return lesson
+    elif clas == "10И":
+        dataframe = openpyxl.load_workbook("Расписание 10И.xlsx")
+        active = dataframe.active
+        lesson = []
+        if wd == 3:
+            num = active[f'A{3}'].value
+            name = active[f'B{3}'].value
+            cabinet = active[f'C{3}'].value
+            teacher = active[f'D{3}'].value
+            lesson.append(f'{num}. {name}, каб. {cabinet}, учитель: {teacher}')
+            return lesson
+
+def send_monday_second(chat_id):
+    print(chat_id)
+    wd = datetime.datetime.today().weekday()
+    if wd == 3:
+        clas = get_user_class(chat_id)
+        lesson = get_Monday_two(clas)
+        bot.send_message(chat_id, 'Расписание на понедельник:')
+        send_lesson(lesson, chat_id)
+
+
+def send_lesson(lesson, chat_id):
+    bot.send_message(chat_id, lesson)
+
+
 def run_bot():
     bot.polling(none_stop=True)
 
@@ -185,5 +225,6 @@ def run_schedule():
 
 if __name__ == '__main__':
     import threading
+
     threading.Thread(target=run_bot).start()
     threading.Thread(target=run_schedule).start()
