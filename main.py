@@ -125,7 +125,10 @@ def get_list_of_lessons(day, user_class):
             num = active[f'A{i}'].value
             name = active[f'B{i}'].value
             cabinet = active[f'C{i}'].value
-            teacher = active[f'D{i}'].value
+            if active[f'G{i}'].value == "да":
+                teacher = active[f'H{i}'].value
+            else:
+                teacher = active[f'D{i}'].value
             lesson.append(f'{num}. {name}, каб. {cabinet}, учитель: {teacher}')
         return lesson
 
