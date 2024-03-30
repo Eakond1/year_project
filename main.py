@@ -83,7 +83,7 @@ def start(message):
 
     schedule.every().thursday.at("08:30").do(send_notification, chat_id)
     schedule.every().thursday.at("09:15").do(send_day_second, chat_id)
-    schedule.every().thursday.at("10:10").do(send_day_third, chat_id)
+    schedule.every().thursday.at("18:37").do(send_day_third, chat_id)
     schedule.every().thursday.at("11:10").do(send_day_forth, chat_id)
     schedule.every().thursday.at("12:10").do(send_day_fifth, chat_id)
     schedule.every().thursday.at("13:05").do(send_day_sixth, chat_id)
@@ -96,6 +96,19 @@ def start(message):
     schedule.every().friday.at("12:10").do(send_day_fifth, chat_id)
     schedule.every().friday.at("13:05").do(send_day_sixth, chat_id)
     schedule.every().friday.at("14:10").do(send_day_seventh, chat_id)
+
+def send_urok(number):
+    wd = datetime.datetime.today().weekday()
+    if wd == 0:
+        dataframe = openpyxl.load_workbook("расписание на понедельник.xlsx")
+        active = dataframe.active
+        lesson = []
+        if number == 2:
+            num = active[f'С{1}'].value
+            name1 = active[f'С{8}'].value
+            cabinet = active[f'A{8}'].value
+            lesson.append(f'{num}. {name1}, каб. {cabinet}')
+            return lesson
 
 
 def send_lessons(lesson, chat_id):
@@ -219,58 +232,16 @@ def send_notification(chat_id):
 def get_day_two(clas):
     wd = datetime.datetime.today().weekday()
     if clas == "10Т":
-        dataframe = openpyxl.load_workbook("Расписание 10Т.xlsx")
-        active = dataframe.active
-        lesson = []
         if wd == 0:
-            num = active[f'A{4}'].value
-            name = active[f'B{4}'].value
-            cabinet = active[f'C{4}'].value
-            if active['G4'].value == "да":
-                teacher = active['H4'].value
-            else:
-                teacher = active[f'D{4}'].value
-            lesson.append(f'{num}. {name}, каб. {cabinet}, учитель: {teacher}')
-            return lesson
-        elif wd == 1:
-            num = active[f'A{14}'].value
-            name = active[f'B{14}'].value
-            cabinet = active[f'C{14}'].value
-            if active['G14'].value == "да":
-                teacher = active['H14'].value
-            else:
-                teacher = active[f'D{14}'].value
-            lesson.append(f'{num}. {name}, каб. {cabinet}, учитель: {teacher}')
-            return lesson
-        elif wd == 2:
-            num = active[f'A{23}'].value
-            name = active[f'B{23}'].value
-            cabinet = active[f'C{23}'].value
-            if active['G23'].value == "да":
-                teacher = active['H23'].value
-            else:
-                teacher = active[f'D{23}'].value
-            lesson.append(f'{num}. {name}, каб. {cabinet}, учитель: {teacher}')
-            return lesson
-        elif wd == 3:
-            num = active[f'A{32}'].value
-            name = active[f'B{32}'].value
-            cabinet = active[f'C{32}'].value
-            if active['G32'].value == "да":
-                teacher = active['H32'].value
-            else:
-                teacher = active[f'D{32}'].value
-            lesson.append(f'{num}. {name}, каб. {cabinet}, учитель: {teacher}')
-            return lesson
-        elif wd == 4:
-            num = active[f'A{41}'].value
-            name = active[f'B{41}'].value
-            cabinet = active[f'C{41}'].value
-            if active['G41'].value == "да":
-                teacher = active['H41'].value
-            else:
-                teacher = active[f'D{41}'].value
-            lesson.append(f'{num}. {name}, каб. {cabinet}, учитель: {teacher}')
+            dataframe = openpyxl.load_workbook("../Test/расписание на понедельник.xlsx")
+            active = dataframe.active
+            lesson = []
+            num = active[f'С{1}'].value
+            name1 = active[f'С{8}'].value
+            name2 = active[f'С{9}'].value
+            cabinet = active[f'A{8}'].value
+            cabinet2 = active[f'C{9}'].value
+            lesson.append(f'{num}. {name1}, {name2}, каб. {cabinet}, {cabinet2}')
             return lesson
     elif clas == "10И":
         dataframe = openpyxl.load_workbook("Расписание 10И.xlsx")
