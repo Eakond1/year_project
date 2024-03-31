@@ -55,7 +55,7 @@ def know_user_class(message):
 @bot.message_handler(commands=['schedule'])
 def start(message):
     chat_id = message.chat.id
-    schedule.every().monday.at("08:30").do(send_notification, chat_id)
+    schedule.every().sunday.at("08:30").do(send_notification, chat_id)
     schedule.every().saturday.at("09:15").do(send_day_second, chat_id)
     schedule.every().monday.at("10:10").do(send_day_third, chat_id)
     schedule.every().monday.at("11:10").do(send_day_forth, chat_id)
@@ -548,66 +548,104 @@ def send_lessons(lesson, chat_id):
         time.sleep(1)
 
 
-def get_list_of_lessons(day, user_class):
+def get_list_of_lessons(user_class):
+    wd = datetime.datetime.today().weekday()
     if user_class == "10Т":
-        dataframe = openpyxl.load_workbook("Расписание 10Т.xlsx")
-        active = dataframe.active
-        lesson = []
-        from_val = 0
-        to_val = 0
-        if day == 'Monday':
-            from_val = 3
-            to_val = 11
-        elif day == 'Tuesday':
-            from_val = 13
-            to_val = 20
-        elif day == 'Wednesday':
-            from_val = 22
-            to_val = 29
-        elif day == 'Thursday':
-            from_val = 31
-            to_val = 38
-        elif day == 'Friday':
-            from_val = 40
-            to_val = 47
-        for i in range(from_val, to_val):
-            num = active[f'A{i}'].value
-            name = active[f'B{i}'].value
-            cabinet = active[f'C{i}'].value
-            teacher = active[f'D{i}'].value
-            lesson.append(f'{num}. {name}, каб. {cabinet}, учитель: {teacher}')
-        return lesson
+        if wd == 0:
+            dataframe = openpyxl.load_workbook("расписание на понедельник.xlsx")
+            active = dataframe.active
+            lesson = []
+            num = active[f'B{1}'].value
+            name1 = active[f'B{4}'].value
+            cabinet = active[f'A{4}'].value
+            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            return lesson
+        elif wd == 1:
+            dataframe = openpyxl.load_workbook("расписание на вторник.xlsx")
+            active = dataframe.active
+            lesson = []
+            num = active[f'B{1}'].value
+            name1 = active[f'B{11}'].value
+            cabinet = active[f'A{11}'].value
+            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            return lesson
+        elif wd == 2:
+            dataframe = openpyxl.load_workbook("расписание на среду.xlsx")
+            active = dataframe.active
+            lesson = []
+            num = active[f'B{1}'].value
+            name1 = active[f'B{5}'].value
+            cabinet = active[f'A{5}'].value
+            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            return lesson
+        elif wd == 3:
+            dataframe = openpyxl.load_workbook("расписание на четверг.xlsx")
+            active = dataframe.active
+            lesson = []
+            num = active[f'B{1}'].value
+            name1 = active[f'B{14}'].value
+            cabinet = active[f'A{14}'].value
+            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            return lesson
+        elif wd == 4:
+            dataframe = openpyxl.load_workbook("расписание на пятницу.xlsx")
+            active = dataframe.active
+            lesson = []
+            num = active[f'B{1}'].value
+            name1 = active[f'B{14}'].value
+            cabinet = active[f'A{14}'].value
+            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            return lesson
     elif user_class == "10И":
-        dataframe = openpyxl.load_workbook("Расписание 10И.xlsx")
-        active = dataframe.active
-        lesson = []
-        from_val = 0
-        to_val = 0
-        if day == 'Monday':
-            from_val = 3
-            to_val = 10
-        elif day == 'Tuesday':
-            from_val = 12
-            to_val = 20
-        elif day == 'Wednesday':
-            from_val = 22
-            to_val = 29
-        elif day == 'Thursday':
-            from_val = 31
-            to_val = 38
-        elif day == 'Friday':
-            from_val = 40
-            to_val = 47
-        for i in range(from_val, to_val):
-            num = active[f'A{i}'].value
-            name = active[f'B{i}'].value
-            cabinet = active[f'C{i}'].value
-            if active[f'G{i}'].value == "да":
-                teacher = active[f'H{i}'].value
-            else:
-                teacher = active[f'D{i}'].value
-            lesson.append(f'{num}. {name}, каб. {cabinet}, учитель: {teacher}')
-        return lesson
+        if wd == 0:
+            dataframe = openpyxl.load_workbook("расписание на понедельник.xlsx")
+            active = dataframe.active
+            lesson = []
+            num = active[f'B{1}'].value
+            name1 = active[f'B{3}'].value
+            cabinet = active[f'A{3}'].value
+            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            return lesson
+        elif wd == 1:
+            dataframe = openpyxl.load_workbook("расписание на вторник.xlsx")
+            active = dataframe.active
+            lesson = []
+            num = active[f'B{1}'].value
+            name1 = active[f'B{13}'].value
+            cabinet = active[f'A{13}'].value
+            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            return lesson
+        elif wd == 2:
+            dataframe = openpyxl.load_workbook("расписание на среду.xlsx")
+            active = dataframe.active
+            lesson = []
+            num = active[f'B{1}'].value
+            name1 = active[f'B{12}'].value
+            cabinet = active[f'A{12}'].value
+            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            return lesson
+        elif wd == 3:
+            dataframe = openpyxl.load_workbook("расписание на четверг.xlsx")
+            active = dataframe.active
+            lesson = []
+            num = active[f'B{1}'].value
+            name1 = active[f'B{13}'].value
+            cabinet = active[f'A{13}'].value
+            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            return lesson
+        elif wd == 4:
+            dataframe = openpyxl.load_workbook("расписание на пятницу.xlsx")
+            active = dataframe.active
+            lesson = []
+            num = active[f'B{1}'].value
+            name1 = active[f'B{8}'].value
+            cabinet = active[f'A{8}'].value
+            name2 = active[f'B{9}'].value
+            cabinet2 = active[f'A{9}'].value
+            lesson.append(f'{num}. {name1}, каб. {cabinet}; {name2}, каб. {cabinet2}')
+            return lesson
+
+
 
 
 def find_user(id):
@@ -635,28 +673,23 @@ def send_notification(chat_id):
     wd = datetime.datetime.today().weekday()
     if wd == 0:
         clas = get_user_class(chat_id)
-        lesson = get_list_of_lessons("Monday", clas)
-        bot.send_message(chat_id, 'Расписание на понедельник:')
+        lesson = get_list_of_lessons(clas)
         send_lessons(lesson, chat_id)
     elif wd == 1:
         clas = get_user_class(chat_id)
-        lesson = get_list_of_lessons("Tuesday", clas)
-        bot.send_message(chat_id, 'Расписание на вторник')
+        lesson = get_list_of_lessons(clas)
         send_lessons(lesson, chat_id)
     elif wd == 2:
         clas = get_user_class(chat_id)
-        lesson = get_list_of_lessons("Wednesday", clas)
-        bot.send_message(chat_id, 'Расписание на среду')
+        lesson = get_list_of_lessons(clas)
         send_lessons(lesson, chat_id)
     elif wd == 3:
         clas = get_user_class(chat_id)
-        lesson = get_list_of_lessons("Thursday", clas)
-        bot.send_message(chat_id, 'Расписание на четверг')
+        lesson = get_list_of_lessons(clas)
         send_lessons(lesson, chat_id)
     elif wd == 4:
         clas = get_user_class(chat_id)
-        lesson = get_list_of_lessons("Friday", clas)
-        bot.send_message(chat_id, 'Расписание на пятницу')
+        lesson = get_list_of_lessons(clas)
         send_lessons(lesson, chat_id)
 
 
