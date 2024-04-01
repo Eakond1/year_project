@@ -973,7 +973,11 @@ def send_lesson(lesson, chat_id):
 
 
 def run_bot():
-    bot.polling(none_stop=True)
+    while True:
+        try:
+            bot.polling(none_stop=True)
+        except:
+            pass
 
 
 def run_schedule():
