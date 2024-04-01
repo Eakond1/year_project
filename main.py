@@ -55,8 +55,8 @@ def know_user_class(message):
 @bot.message_handler(commands=['schedule'])
 def start(message):
     chat_id = message.chat.id
-    schedule.every().sunday.at("08:30").do(send_notification, chat_id)
-    schedule.every().saturday.at("09:15").do(send_day_second, chat_id)
+    schedule.every().monday.at("18:26").do(send_notification, chat_id)
+    schedule.every().monday.at("09:15").do(send_day_second, chat_id)
     schedule.every().monday.at("10:10").do(send_day_third, chat_id)
     schedule.every().monday.at("11:10").do(send_day_forth, chat_id)
     schedule.every().monday.at("12:10").do(send_day_fifth, chat_id)
@@ -644,8 +644,6 @@ def get_list_of_lessons(user_class):
             cabinet2 = active[f'A{9}'].value
             lesson.append(f'{num}. {name1}, каб. {cabinet}; {name2}, каб. {cabinet2}')
             return lesson
-
-
 
 
 def find_user(id):
