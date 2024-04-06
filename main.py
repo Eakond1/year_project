@@ -55,7 +55,7 @@ def know_user_class(message):
 @bot.message_handler(commands=['schedule'])
 def start(message):
     chat_id = message.chat.id
-    schedule.every().monday.at("18:26").do(send_notification, chat_id)
+    schedule.every().monday.at("08:30").do(send_notification, chat_id)
     schedule.every().monday.at("09:15").do(send_day_second, chat_id)
     schedule.every().monday.at("10:10").do(send_day_third, chat_id)
     schedule.every().monday.at("11:10").do(send_day_forth, chat_id)
@@ -555,94 +555,379 @@ def get_list_of_lessons(user_class):
             dataframe = openpyxl.load_workbook("расписание на понедельник.xlsx")
             active = dataframe.active
             lesson = []
-            num = active[f'B{1}'].value
+            num1 = active[f'B{1}'].value
             name1 = active[f'B{4}'].value
-            cabinet = active[f'A{4}'].value
-            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            cabinet1 = active[f'A{4}'].value
+            num2 = active[f'C{1}'].value
+            name2 = active[f'C{8}'].value
+            name3 = active[f'C{9}'].value
+            cabinet2 = active[f'A{8}'].value
+            cabinet3 = active[f'A{9}'].value
+            num4 = active[f'D{1}'].value
+            name4 = active[f'D{8}'].value
+            name5 = active[f'D{9}'].value
+            cabinet4 = active[f'A{8}'].value
+            cabinet5 = active[f'A{9}'].value
+            num6 = active[f'E{1}'].value
+            name6 = active[f'E{8}'].value
+            name7 = active[f'E{9}'].value
+            cabinet6 = active[f'A{8}'].value
+            cabinet7 = active[f'A{9}'].value
+            num8 = active[f'F{1}'].value
+            name8 = active[f'F{8}'].value
+            name9 = active[f'F{9}'].value
+            cabinet8 = active[f'A{8}'].value
+            cabinet9 = active[f'A{9}'].value
+            num10 = active[f'G{1}'].value
+            name10 = active[f'G{13}'].value
+            cabinet10 = active[f'A{13}'].value
+            num11 = active[f'H{1}'].value
+            name11 = active[f'H{13}'].value
+            cabinet11 = active[f'A{13}'].value
+            num12 = active[f'I{1}'].value
+            name12 = active[f'I{3}'].value
+            name13 = active[f'I{4}'].value
+            cabinet12 = active[f'A{3}'].value
+            cabinet13 = active[f'A{4}'].value
+            lesson.append(f'{num1}. {name1}, каб. {cabinet1};\n \
+                            {num2}. {name2}, каб. {cabinet2};\n \
+                            {num2}. {name3}, каб. {cabinet3};\n \
+                            {num4}. {name4}, каб. {cabinet4};\n \
+                            {num4}. {name5}, каб. {cabinet5};\n \
+                            {num6}. {name6}, каб. {cabinet6};\n \
+                            {num6}. {name7}, каб. {cabinet7};\n \
+                            {num8}. {name8}, каб. {cabinet8};\n \
+                            {num8}. {name9}, каб. {cabinet9};\n \
+                            {num10}. {name10}, каб. {cabinet10};\n \
+                            {num11}. {name11}, каб. {cabinet11};\n \
+                            {num12}. {name12}, каб. {cabinet12};\n \
+                            {num12}. {name13}, каб. {cabinet13};')
             return lesson
         elif wd == 1:
             dataframe = openpyxl.load_workbook("расписание на вторник.xlsx")
             active = dataframe.active
             lesson = []
-            num = active[f'B{1}'].value
+            num1 = active[f'B{1}'].value
             name1 = active[f'B{11}'].value
-            cabinet = active[f'A{11}'].value
-            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            cabinet1 = active[f'A{11}'].value
+            num2 = active[f'C{1}'].value
+            name2 = active[f'C{14}'].value
+            cabinet2 = active[f'A{14}'].value
+            num3 = active[f'D{1}'].value
+            name3 = active[f'D{16}'].value
+            cabinet3 = active[f'A{16}'].value
+            num4 = active[f'E{1}'].value
+            name4 = active[f'E{8}'].value
+            cabinet4 = active[f'A{8}'].value
+            num5 = active[f'F{1}'].value
+            name5 = active[f'F{4}'].value
+            cabinet5 = active[f'A{4}'].value
+            name6 = active[f'F{3}'].value
+            cabinet6 = active[f'A{3}'].value
+            num7 = active[f'G{1}'].value
+            name7 = active[f'G{4}'].value
+            cabinet7 = active[f'A{4}'].value
+            name8 = active[f'G{3}'].value
+            cabinet8 = active[f'A{3}'].value
+            num9 = active[f'H{1}'].value
+            name9 = active[f'H{4}'].value
+            cabinet9 = active[f'A{4}'].value
+            lesson.append(f'{num1}. {name1}, каб. {cabinet1};\n \
+                            {num2}. {name2}, каб. {cabinet2};\n \
+                            {num3}. {name3}, каб. {cabinet3};\n \
+                            {num4}. {name4}, каб. {cabinet4};\n \
+                            {num5}. {name5}, каб. {cabinet5};\n \
+                            {num5}. {name6}, каб. {cabinet6};\n \
+                            {num7}. {name7}, каб. {cabinet7};\n \
+                            {num7}. {name8}, каб. {cabinet8};\n \
+                            {num9}. {name9}, каб. {cabinet9}; ')
             return lesson
         elif wd == 2:
             dataframe = openpyxl.load_workbook("расписание на среду.xlsx")
             active = dataframe.active
             lesson = []
-            num = active[f'B{1}'].value
+            num1 = active[f'B{1}'].value
             name1 = active[f'B{5}'].value
-            cabinet = active[f'A{5}'].value
-            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            cabinet1 = active[f'A{5}'].value
+            num2 = active[f'C{1}'].value
+            name2 = active[f'C{5}'].value
+            cabinet2 = active[f'A{5}'].value
+            num3 = active[f'D{1}'].value
+            name3 = active[f'D{10}'].value
+            cabinet3 = active[f'A{10}'].value
+            num4 = active[f'E{1}'].value
+            name4 = active[f'E{8}'].value
+            cabinet4 = active[f'A{8}'].value
+            name5 = active[f'E{9}'].value
+            cabinet5 = active[f'A{9}'].value
+            num6 = active[f'F{1}'].value
+            name6 = active[f'F{8}'].value
+            cabinet6 = active[f'A{8}'].value
+            name7 = active[f'F{9}'].value
+            cabinet7 = active[f'A{9}'].value
+            num8 = active[f'G{1}'].value
+            name8 = active[f'G{13}'].value
+            cabinet8 = active[f'A{13}'].value
+            num9 = active[f'H{1}'].value
+            name9 = active[f'H{13}'].value
+            cabinet9 = active[f'A{13}'].value
+            lesson.append(f'{num1}. {name1}, каб. {cabinet1};\n \
+                            {num2}. {name2}, каб. {cabinet2};\n \
+                            {num3}. {name3}, каб. {cabinet3};\n \
+                            {num4}. {name4}, каб. {cabinet4};\n \
+                            {num4}. {name5}, каб. {cabinet5};\n \
+                            {num6}. {name6}, каб. {cabinet6};\n \
+                            {num6}. {name7}, каб. {cabinet7};\n \
+                            {num8}. {name8}, каб. {cabinet8};\n \
+                            {num9}. {name9}, каб. {cabinet9}; ')
             return lesson
         elif wd == 3:
             dataframe = openpyxl.load_workbook("расписание на четверг.xlsx")
             active = dataframe.active
             lesson = []
-            num = active[f'B{1}'].value
+            num1 = active[f'B{1}'].value
             name1 = active[f'B{14}'].value
-            cabinet = active[f'A{14}'].value
-            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            cabinet1 = active[f'A{14}'].value
+            num2 = active[f'C{1}'].value
+            name2 = active[f'C{14}'].value
+            cabinet2 = active[f'A{14}'].value
+            num3 = active[f'D{1}'].value
+            name3 = active[f'D{13}'].value
+            cabinet3 = active[f'A{13}'].value
+            num4 = active[f'E{1}'].value
+            name4 = active[f'E{13}'].value
+            cabinet4 = active[f'A{13}'].value
+            num5 = active[f'F{1}'].value
+            name5 = active[f'F{10}'].value
+            cabinet5 = active[f'A{10}'].value
+            num6 = active[f'G{1}'].value
+            name6 = active[f'G{10}'].value
+            cabinet6 = active[f'A{10}'].value
+            num7 = active[f'H{1}'].value
+            name7 = active[f'H{5}'].value
+            cabinet7 = active[f'A{5}'].value
+            lesson.append(f'{num1}. {name1}, каб. {cabinet1};\n \
+                            {num2}. {name2}, каб. {cabinet2};\n \
+                            {num3}. {name3}, каб. {cabinet3};\n \
+                            {num4}. {name4}, каб. {cabinet4};\n \
+                            {num5}. {name5}, каб. {cabinet5};\n \
+                            {num6}. {name6}, каб. {cabinet6};\n \
+                            {num7}. {name7}, каб. {cabinet7};')
             return lesson
         elif wd == 4:
             dataframe = openpyxl.load_workbook("расписание на пятницу.xlsx")
             active = dataframe.active
             lesson = []
-            num = active[f'B{1}'].value
+            num1 = active[f'B{1}'].value
             name1 = active[f'B{14}'].value
-            cabinet = active[f'A{14}'].value
-            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            cabinet1 = active[f'A{14}'].value
+            num2 = active[f'C{1}'].value
+            name2 = active[f'C{13}'].value
+            cabinet2 = active[f'A{13}'].value
+            num3 = active[f'D{1}'].value
+            name3 = active[f'D{13}'].value
+            cabinet3 = active[f'A{13}'].value
+            num4 = active[f'E{1}'].value
+            name4 = active[f'E{2}'].value
+            cabinet4 = active[f'A{2}'].value
+            num5 = active[f'F{1}'].value
+            name5 = active[f'F{2}'].value
+            cabinet5 = active[f'A{2}'].value
+            num6 = active[f'G{1}'].value
+            name6 = active[f'G{5}'].value
+            cabinet6 = active[f'A{5}'].value
+            num7 = active[f'H{1}'].value
+            name7 = active[f'H{5}'].value
+            cabinet7 = active[f'A{5}'].value
+            lesson.append(f'{num1}. {name1}, каб. {cabinet1};\n \
+                            {num2}. {name2}, каб. {cabinet2};\n \
+                            {num3}. {name3}, каб. {cabinet3};\n \
+                            {num4}. {name4}, каб. {cabinet4};\n \
+                            {num5}. {name5}, каб. {cabinet5};\n \
+                            {num6}. {name6}, каб. {cabinet6};\n \
+                            {num7}. {name7}, каб. {cabinet7};')
             return lesson
     elif user_class == "10И":
         if wd == 0:
             dataframe = openpyxl.load_workbook("расписание на понедельник.xlsx")
             active = dataframe.active
             lesson = []
-            num = active[f'B{1}'].value
+            num1 = active[f'B{1}'].value
             name1 = active[f'B{3}'].value
-            cabinet = active[f'A{3}'].value
-            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            cabinet1 = active[f'A{3}'].value
+            num2 = active[f'C{1}'].value
+            name2 = active[f'C{13}'].value
+            cabinet2 = active[f'A{13}'].value
+            num3 = active[f'D{1}'].value
+            name3 = active[f'D{12}'].value
+            cabinet3 = active[f'A{12}'].value
+            num4 = active[f'E{1}'].value
+            name4 = active[f'E{18}'].value
+            cabinet4 = active[f'A{18}'].value
+            num5 = active[f'F{1}'].value
+            name5 = active[f'F{14}'].value
+            cabinet5 = active[f'A{14}'].value
+            num6 = active[f'G{1}'].value
+            name6 = active[f'G{15}'].value
+            cabinet6 = active[f'A{15}'].value
+            num7 = active[f'H{1}'].value
+            name7 = active[f'H{15}'].value
+            cabinet7 = active[f'A{15}'].value
+            lesson.append(f'{num1}. {name1}, каб. {cabinet1};\n \
+                            {num2}. {name2}, каб. {cabinet2};\n \
+                            {num3}. {name3}, каб. {cabinet3};\n \
+                            {num4}. {name4}, каб. {cabinet4};\n \
+                            {num5}. {name5}, каб. {cabinet5};\n \
+                            {num6}. {name6}, каб. {cabinet6};\n \
+                            {num7}. {name7}, каб. {cabinet7};')
             return lesson
         elif wd == 1:
             dataframe = openpyxl.load_workbook("расписание на вторник.xlsx")
             active = dataframe.active
             lesson = []
-            num = active[f'B{1}'].value
+            num1 = active[f'B{1}'].value
             name1 = active[f'B{13}'].value
-            cabinet = active[f'A{13}'].value
-            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            cabinet1 = active[f'A{13}'].value
+            num2 = active[f'C{1}'].value
+            name2 = active[f'C{13}'].value
+            cabinet2 = active[f'A{13}'].value
+            num3 = active[f'D{1}'].value
+            name3 = active[f'D{10}'].value
+            cabinet3 = active[f'A{10}'].value
+            num4 = active[f'E{1}'].value
+            name4 = active[f'E{16}'].value
+            cabinet4 = active[f'A{16}'].value
+            num5 = active[f'F{1}'].value
+            name5 = active[f'F{11}'].value
+            cabinet5 = active[f'A{11}'].value
+            num6 = active[f'G{1}'].value
+            name6 = active[f'G{14}'].value
+            cabinet6 = active[f'A{14}'].value
+            num7 = active[f'H{1}'].value
+            name7 = active[f'H{12}'].value
+            cabinet7 = active[f'A{12}'].value
+            num8 = active[f'I{1}'].value
+            name8 = active[f'I{3}'].value
+            cabinet8 = active[f'I{3}'].value
+            name9 = active[f'I{4}'].value
+            cabinet9 = active[f'I{4}'].value
+            lesson.append(f'{num1}. {name1}, каб. {cabinet1};\n \
+                            {num2}. {name2}, каб. {cabinet2};\n \
+                            {num3}. {name3}, каб. {cabinet3};\n \
+                            {num4}. {name4}, каб. {cabinet4};\n \
+                            {num5}. {name5}, каб. {cabinet5};\n \
+                            {num6}. {name6}, каб. {cabinet6};\n \
+                            {num7}. {name7}, каб. {cabinet7};\n \
+                            {num8}. {name8}, каб. {cabinet8};\n \
+                            {num8}. {name9}, каб. {cabinet9};')
             return lesson
         elif wd == 2:
             dataframe = openpyxl.load_workbook("расписание на среду.xlsx")
             active = dataframe.active
             lesson = []
-            num = active[f'B{1}'].value
+            num1 = active[f'B{1}'].value
             name1 = active[f'B{12}'].value
-            cabinet = active[f'A{12}'].value
-            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            cabinet1 = active[f'A{12}'].value
+            num2 = active[f'C{1}'].value
+            name2 = active[f'C{12}'].value
+            cabinet2 = active[f'A{12}'].value
+            num3 = active[f'D{1}'].value
+            name3 = active[f'D{14}'].value
+            cabinet3 = active[f'A{14}'].value
+            num4 = active[f'E{1}'].value
+            name4 = active[f'E{3}'].value
+            cabinet4 = active[f'A{3}'].value
+            name5 = active[f'E{4}'].value
+            cabinet5 = active[f'A{4}'].value
+            num6 = active[f'F{1}'].value
+            name6 = active[f'F{3}'].value
+            cabinet6 = active[f'A{3}'].value
+            name7 = active[f'F{4}'].value
+            cabinet7 = active[f'A{4}'].value
+            num8 = active[f'G{1}'].value
+            name8 = active[f'G{10}'].value
+            cabinet8 = active[f'A{10}'].value
+            num9 = active[f'H{1}'].value
+            name9 = active[f'H{10}'].value
+            cabinet9 = active[f'A{10}'].value
+            lesson.append(f'{num1}. {name1}, каб. {cabinet1};\n \
+                            {num2}. {name2}, каб. {cabinet2};\n \
+                            {num3}. {name3}, каб. {cabinet3};\n \
+                            {num4}. {name4}, каб. {cabinet4};\n \
+                            {num4}. {name5}, каб. {cabinet5};\n \
+                            {num6}. {name6}, каб. {cabinet6};\n \
+                            {num6}. {name7}, каб. {cabinet7};\n \
+                            {num8}. {name8}, каб. {cabinet8};\n \
+                            {num9}. {name9}, каб. {cabinet9}; ')
             return lesson
         elif wd == 3:
             dataframe = openpyxl.load_workbook("расписание на четверг.xlsx")
             active = dataframe.active
             lesson = []
-            num = active[f'B{1}'].value
+            num1 = active[f'B{1}'].value
             name1 = active[f'B{13}'].value
-            cabinet = active[f'A{13}'].value
-            lesson.append(f'{num}. {name1}, каб. {cabinet};')
+            cabinet1 = active[f'A{13}'].value
+            num2 = active[f'C{1}'].value
+            name2 = active[f'C{13}'].value
+            cabinet2 = active[f'A{13}'].value
+            num3 = active[f'D{1}'].value
+            name3 = active[f'D{12}'].value
+            cabinet3 = active[f'A{12}'].value
+            num4 = active[f'E{1}'].value
+            name4 = active[f'E{12}'].value
+            cabinet4 = active[f'A{12}'].value
+            num5 = active[f'F{1}'].value
+            name5 = active[f'F{13}'].value
+            cabinet5 = active[f'A{13}'].value
+            num6 = active[f'G{1}'].value
+            name6 = active[f'G{9}'].value
+            cabinet6 = active[f'A{9}'].value
+            num7 = active[f'H{1}'].value
+            name7 = active[f'H{9}'].value
+            cabinet7 = active[f'A{9}'].value
+            lesson.append(f'{num1}. {name1}, каб. {cabinet1};\n \
+                            {num2}. {name2}, каб. {cabinet2};\n \
+                            {num3}. {name3}, каб. {cabinet3};\n \
+                            {num4}. {name4}, каб. {cabinet4};\n \
+                            {num5}. {name5}, каб. {cabinet5};\n \
+                            {num6}. {name6}, каб. {cabinet6};\n \
+                            {num7}. {name7}, каб. {cabinet7};')
             return lesson
         elif wd == 4:
             dataframe = openpyxl.load_workbook("расписание на пятницу.xlsx")
             active = dataframe.active
             lesson = []
-            num = active[f'B{1}'].value
+            num1 = active[f'B{1}'].value
             name1 = active[f'B{8}'].value
-            cabinet = active[f'A{8}'].value
+            cabinet1 = active[f'A{8}'].value
             name2 = active[f'B{9}'].value
             cabinet2 = active[f'A{9}'].value
-            lesson.append(f'{num}. {name1}, каб. {cabinet}; {name2}, каб. {cabinet2}')
+            num3 = active[f'C{1}'].value
+            name3 = active[f'C{14}'].value
+            cabinet3 = active[f'A{14}'].value
+            num4 = active[f'D{1}'].value
+            name4 = active[f'D{8}'].value
+            cabinet4 = active[f'A{8}'].value
+            num5 = active[f'E{1}'].value
+            name5 = active[f'E{13}'].value
+            cabinet5 = active[f'A{13}'].value
+            num6 = active[f'F{1}'].value
+            name6 = active[f'F{13}'].value
+            cabinet6 = active[f'A{13}'].value
+            num7 = active[f'G{1}'].value
+            name7 = active[f'G{11}'].value
+            cabinet7 = active[f'A{11}'].value
+            num8 = active[f'H{1}'].value
+            name8 = active[f'H{13}'].value
+            cabinet8 = active[f'A{13}'].value
+            lesson.append(f'{num1}. {name1}, каб. {cabinet1};\n \
+                            {num1}. {name2}, каб. {cabinet2};\n \
+                            {num3}. {name3}, каб. {cabinet3};\n \
+                            {num4}. {name4}, каб. {cabinet4};\n \
+                            {num5}. {name5}, каб. {cabinet5};\n \
+                            {num6}. {name6}, каб. {cabinet6};\n \
+                            {num7}. {name7}, каб. {cabinet7};\n \
+                            {num8}. {name8}, каб. {cabinet8}; ')
             return lesson
 
 
