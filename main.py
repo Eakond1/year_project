@@ -46,7 +46,7 @@ def know_user_class(message):
                 "class": user_class
             })
             save_data()
-            bot.send_message(chat_id, 'Вы успешно завершили регистрацию', reply_markup=types.ReplyKeyboardRemove())
+            bot.send_message(chat_id, 'Вы успешно завершили регистрацию, для начала работы бота введите /schedule ', reply_markup=types.ReplyKeyboardRemove())
         else:
             m = bot.send_message(chat_id, 'Повторите попытку')
             bot.register_next_step_handler(m, know_user_class)
