@@ -6,7 +6,7 @@ import json
 import datetime
 import schedule
 
-bot = telebot.TeleBot('')
+bot = telebot.TeleBot('7144965325:AAF8rImRwnT969EWi4eK6GBOqYzTpYbB2Wg')
 users = []
 
 try:
@@ -83,7 +83,7 @@ def start(message):
 
     schedule.every().thursday.at("08:30").do(send_notification, chat_id)
     schedule.every().thursday.at("09:15").do(send_day_second, chat_id)
-    schedule.every().thursday.at("18:37").do(send_day_third, chat_id)
+    schedule.every().thursday.at("10:10").do(send_day_third, chat_id)
     schedule.every().thursday.at("11:10").do(send_day_forth, chat_id)
     schedule.every().thursday.at("12:10").do(send_day_fifth, chat_id)
     schedule.every().thursday.at("13:05").do(send_day_sixth, chat_id)
@@ -411,9 +411,9 @@ def send_lesson_10i(number):
         elif number == 8:
             num = active[f'I{1}'].value
             name1 = active[f'I{3}'].value
-            cabinet = active[f'I{3}'].value
+            cabinet = active[f'A{3}'].value
             name2 = active[f'I{4}'].value
-            cabinet2 = active[f'I{4}'].value
+            cabinet2 = active[f'A{4}'].value
             lesson.append(f'{num}. {name1}, каб. {cabinet}; {name2}, каб. {cabinet2}')
             return lesson
     elif wd == 2:
@@ -719,8 +719,8 @@ def get_list_of_lessons(user_class):
             active = dataframe.active
             lesson = []
             num1 = active[f'B{1}'].value
-            name1 = active[f'B{14}'].value
-            cabinet1 = active[f'A{14}'].value
+            name1 = active[f'B{13}'].value
+            cabinet1 = active[f'A{13}'].value
             num2 = active[f'C{1}'].value
             name2 = active[f'C{13}'].value
             cabinet2 = active[f'A{13}'].value
@@ -808,9 +808,9 @@ def get_list_of_lessons(user_class):
             cabinet7 = active[f'A{12}'].value
             num8 = active[f'I{1}'].value
             name8 = active[f'I{3}'].value
-            cabinet8 = active[f'I{3}'].value
+            cabinet8 = active[f'A{3}'].value
             name9 = active[f'I{4}'].value
-            cabinet9 = active[f'I{4}'].value
+            cabinet9 = active[f'A{4}'].value
             lesson.append(f'{num1}. {name1}, каб. {cabinet1};\n \
                             {num2}. {name2}, каб. {cabinet2};\n \
                             {num3}. {name3}, каб. {cabinet3};\n \
