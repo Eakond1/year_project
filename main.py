@@ -38,7 +38,7 @@ def know_user_class(message):
     u = find_user(chat_id)
     if u == True:
         change_user_class(chat_id, user_class)
-        bot.send_message(chat_id, 'Вы успешно изменили свой класс', reply_markup=types.ReplyKeyboardRemove())
+        bot.send_message(chat_id, 'Вы успешно изменили свой класс, для начала работы бота нажмите /schedule', reply_markup=types.ReplyKeyboardRemove())
     else:
         if user_class == "10Т" or user_class == "10И":
             users.append({
